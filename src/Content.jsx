@@ -1,18 +1,27 @@
 import { useState } from 'react'
 import plus from "./assets/icon-plus.svg"
 import minus from "./assets/icon-minus.svg"
-import cart from "./assets/icon-cart.svg"
+import cartIcon from "./assets/icon-cart.svg"
 import ImageSlider from "./ImageSlider"
+import { useDispatch } from 'react-redux';
+import { addToCart } from "./cartSlice"
 
 function Content() {
-    const [quantity, setQuantity] = useState(0)
 
+    const [quantity, setQuantity] = useState(1)
+    //const cart = useSelector((state) => state.cart);
+    const dispatcher = useDispatch();
+
+    const handleAddToCart = () =>{
+       dispatcher(addToCart({ name: 'Nike Limited Edition Sneakers', price: 125, quantity }));
+        setQuantity(1)
+    }
     const handleIncrement = () => {
-        setQuantity(prev => prev + 1)
+        setQuantity((prev) => prev + 1)
     }
 
     const handleDecrement = () => {
-        setQuantity(prev => prev > 0 ? prev - 1 : 0)
+        setQuantity((prev) => prev > 0 ? prev - 1 : 0)
     }
 
     return (
@@ -61,7 +70,7 @@ function Content() {
                                 onClick={handleDecrement}
                                 className="text-orange-500 hover:opacity-75 transition-opacity p-1"
                             >
-                                <img src={minus} alt="Decrease quantity" className="w-3 h-3" />
+                                <img src={minus} alt="Decrease quantity" className="w-3 h-1" />
                             </button>
                             <span className="font-bold text-gray-900">{quantity}</span>
                             <button 
@@ -74,11 +83,12 @@ function Content() {
 
                         {/* Add to Cart Button */}
                         <button 
-                            className="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg 
-                                     flex items-center justify-center gap-4 shadow-lg shadow-orange-500/50 
-                                     transition-colors duration-200"
+                        onClick={handleAddToCart}
+                            className=" bg-orange-600 hover:bg-orange-500 text-white font-bold py-3 px-10 rounded-lg 
+                                     flex items-center justify-center gap-6 shadow-lg shadow-orange-500/50 
+                                     transition-colors duration-200 "
                         >
-                            <img src={cart} alt="" className="w-5 h-5 brightness-200" />
+                            <img src={cartIcon} alt="" className="w-5 h-5 brightness-200" />
                             <span>Add to Cart</span>
                         </button>
                     </div>

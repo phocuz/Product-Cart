@@ -3,13 +3,26 @@ import menu from "./assets/icon-menu.svg"
 import cart from "./assets/icon-cart.svg"
 import image from "./assets/image-avatar.png"
 import close from "./assets/icon-close.svg"
+import { useDispatch, useSelector } from "react-redux"
+import { toggleCartDetails } from "./cartSlice"
+import CartItem from "./CartItem"
+
 function Header() {
+    const cartItem = useSelector((state) => state.cart.cart);
+    //const showCardDetails = useSelector((state) => state.cart.showCardDetails);
     const [isOpen, setIsOpen] = useState(false);
+    const [isCartOpen,setIsCartOpen] = useState(false)
+    const dispatcher = useDispatch();
+
     
     function handleToggle() {
         setIsOpen(!isOpen);
     }
     
+    function handleShowCartDetails(){
+        dispatcher(toggleCartDetails(setIsCartOpen(!isCartOpen)))
+        console.log(cartItem)
+    }
     return (
         <header className="relative flex items-center justify-between px-4 py-6 md:px-8 lg:px-16 border-b border-gray-200">
             {/* Left section with logo and navigation */}
@@ -76,9 +89,18 @@ function Header() {
 
             {/* Right section with cart and profile */}
             <div className="flex items-center gap-6">
-                <button className="relative hover:opacity-75 transition-opacity">
-                    <img src={cart} alt="cart-icon" className="w-6 h-6" />
+                <button className="relative hover:opacity-75 transition-opacity" onClick={handleShowCartDetails}>
+                    <img src={cart} alt="cart-icon" className="w-8 h-8" />
+                    {
+                        cartItem.length >0 && (
+                            <span className="absolute top-0 right-0 bg-orange-400 text-white rounded-full px-1  text-sm font-bold">{cartItem.length}</span>
+                        )
+                    },
+
                 </button>
+                {
+                        isCartOpen &&  cartItem.length > 1 && <CartItem />
+                    }
                 <button className="hover:opacity-75 transition-opacity">
                     <img 
                         src={image} 
