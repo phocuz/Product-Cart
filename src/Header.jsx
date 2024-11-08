@@ -92,14 +92,14 @@ function Header() {
                 <button className="relative hover:opacity-75 transition-opacity" onClick={handleShowCartDetails}>
                     <img src={cart} alt="cart-icon" className="w-8 h-8" />
                     {
-                        cartItem.length >0 && (
+                        cartItem.length > 0 && (
                             <span className="absolute top-0 right-0 bg-orange-400 text-white rounded-full px-1  text-sm font-bold">{cartItem.length}</span>
                         )
                     },
 
                 </button>
                 {
-                        isCartOpen &&  cartItem.length > 1 && <CartItem />
+                        isCartOpen  && <CartItem />
                     }
                 <button className="hover:opacity-75 transition-opacity">
                     <img 

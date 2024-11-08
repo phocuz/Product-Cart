@@ -5,6 +5,7 @@ import cartIcon from "./assets/icon-cart.svg"
 import ImageSlider from "./ImageSlider"
 import { useDispatch } from 'react-redux';
 import { addToCart } from "./cartSlice"
+import { v4 as uuidv4 } from 'uuid';
 
 function Content() {
 
@@ -13,7 +14,7 @@ function Content() {
     const dispatcher = useDispatch();
 
     const handleAddToCart = () =>{
-       dispatcher(addToCart({ name: 'Nike Limited Edition Sneakers', price: 125, quantity }));
+       dispatcher(addToCart({ id: uuidv4(), name: 'Nike Limited Edition Sneakers', price: 125, quantity}));
         setQuantity(1)
     }
     const handleIncrement = () => {
