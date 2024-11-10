@@ -7,12 +7,12 @@ function CartItem() {
   const cartItems = useSelector((state) => state.cart?.cart ?? []);
   const dispatch = useDispatch();
 
-  const defaultItem = {
-    image,
-    name: "Fall Limited Edition Sneakers",
-    price: 125.0,
-    quantity: 3,
-  };
+  // const defaultItem = {
+  //   image,
+  //   name: "Fall Limited Edition Sneakers",
+  //   price: 125.0,
+  //   quantity: 3,
+  // };
 
   const handleRemoveItem = () => {
   try {
@@ -29,7 +29,7 @@ function CartItem() {
   // Calculate total price for all items
   const calculateCartTotal = () => {
     if (!cartItems || cartItems.length === 0) {
-      return calculateTotalPrice(defaultItem.price, defaultItem.quantity);
+      return calculateTotalPrice(0, 0);
     }
     return cartItems.reduce((total, item) => {
       return total + (item.price * item.quantity);
@@ -74,22 +74,26 @@ function CartItem() {
             </div>
           ))
         ) : (
-          <div className="flex items-center gap-4">
-            <img 
-              src={defaultItem.image} 
-              alt={`${defaultItem.name} thumbnail`} 
-              className="w-16 h-14 rounded" 
-            />
+          // <div className="flex items-center gap-4">
+          //   <img 
+          //     src={defaultItem.image} 
+          //     alt={`${defaultItem.name} thumbnail`} 
+          //     className="w-16 h-14 rounded" 
+          //   />
             
-            <div className="flex-1">
-              <p className="text-gray-700 font-semibold">{defaultItem.name}</p>
-              <div className="text-gray-500">
-                <span>${defaultItem.price.toFixed(2)} × {defaultItem.quantity}</span> 
-                <span className="font-bold text-gray-800 ml-2">
-                  ${calculateTotalPrice(defaultItem.price, defaultItem.quantity)}
-                </span>
-              </div>
-            </div>
+          //   <div className="flex-1">
+          //     <p className="text-gray-700 font-semibold">{defaultItem.name}</p>
+          //     <div className="text-gray-500">
+          //       <span>${defaultItem.price.toFixed(2)} × {defaultItem.quantity}</span> 
+          //       <span className="font-bold text-gray-800 ml-2">
+          //         ${calculateTotalPrice(defaultItem.price, defaultItem.quantity)}
+          //       </span>
+          //     </div>
+          //   </div>
+          // </div>
+
+          <div>
+            <h1>Your cart is Empty</h1>
           </div>
         )}
       </div>
